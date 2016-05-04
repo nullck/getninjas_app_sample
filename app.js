@@ -1,7 +1,7 @@
 var jsonfile = require('jsonfile')
 
-var file = '/tmp/data.json'
+var file = '/var/log/app.log'
 var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
-var obj = {'@message': 'I\'m Grut'}
+var obj = {'@message': 'I am Groot'}
 
-jsonfile.writeFileSync(file, obj, {spaces: 2})
+jsonfile.writeFileSync(file, obj, {flag: 'a'} )
