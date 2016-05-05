@@ -1,0 +1,5 @@
+image: nullck/getninjas_app_sample
+build: .
+command: while true; do /usr/local/bin/node app.js; sleep 1; done
+volumes:
+- ./log:/var/log
