@@ -1,5 +1,22 @@
-image: nullck/getninjas_app_sample
-build: .
-command: while true; do /usr/local/bin/node app.js; sleep 1; done
-volumes:
-- ./log:/var/log
+version: '2'
+storage:
+  volumes:
+    - ./log
+services:
+  app:
+    image: "nullck/getninjas_app_sample"
+    command: while true; do /usr/local/bin/node app.js; sleep 1; done
+    volumes:
+    - ./log:/var/log
+    depends_on:
+      - beaver
+    links:
+      - beaver
+  beaver:
+    image: "ombitron/docker-beaver"
+    environment:
+      BEAVER_OPTS: "-c /data/beaver.conf"
+    volumes_from:
+      - storage
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
